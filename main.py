@@ -1,10 +1,11 @@
-#Launchpad tic tac toe using AI
+#Launchpad tic tac toe using AI and launchpad.py https://github.com/FMMT666/launchpad.py
 #Christos Constantinou , 2021
-from player_move import *
+from do_move import *
 import sys
-import random
 from buttons import Buttons
 from board import Board
+from launchpad_out import Launchpad_Out
+
 try:
     import launchpad_py as launchpad
 except ImportError:
@@ -14,6 +15,7 @@ except ImportError:
         sys.exit("error loading launchpad.py")
 class Game:
     def __init__(self):
+        #offical launchpad.py way of initializing the launchpad
         mode = None
         if launchpad.Launchpad().Check(0):
             self.lp = launchpad.Launchpad()
@@ -23,34 +25,24 @@ class Game:
         if mode is None:
             print("Did not find any Launchpads, meh...")
             return
+        print("QUIT: Push button 1 , RESET: Push button 2, MODES: RIGHT BAR")
+        ###
 
-        print("QUIT: Push button 1 , RESET: Push button 2", "MODES: RIGHT BAR")
-
-        self.dif=1 #difficlty 1=hard,2=easy,3=1v1
-        self.frame = []
-        self.X= []
-        self.O=[]
-        self.Xturn = random.getrandbits(1)
-        self.board= Board(self.lp,self.frame)
-        self.check = Check()
-        self.player_move = Player_move(self.Xturn)
-        self.ai_move = AI_move()
-        self.buttons = Buttons()
+        self.lp_out= Launchpad_Out(self.lp)
+        self.board = Board(self.lp_out)
+        self.buttons = Buttons(self.board,self.lp_out)
+        self.do_move = Do_move(self.board,self.lp_out)
 #game loop
     def game_loop(self):
         events = self.lp.ButtonStateRaw()
-        self.difficulty(events)
-        Buttons.button_actions(self.buttons,events,self.lp,self.frame,self.X,self.O)
-        Player_move.move(self.player_move,self.lp,self.frame,self.X,self.O,events,self.dif)
-        Check.check_cases(self.check,self.lp,self.frame,self.X,self.O)
-    def difficulty(self,events):
-        if events == [205, True]:
-            self.dif=1
-        if events == [206, True]:
-            self.dif=2
-        if events == [207, True]:
-            self.dif=3
+        self.buttons.button_actions(events)
+        self.do_move.move(events)
+
+
+
 if __name__ == "__main__":
+    #runs main once (initializes paramters,creates boardframe etc)
     game = Game()
+    #loops the game
     while True:
         game.game_loop()
