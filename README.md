@@ -59,8 +59,8 @@ The project was tested in three shows:
 2. **Non-Interactive Show**: No audience interaction.
 3. **Free4All**: Open DJ booth in the 360LAB.
 
-![360LAB](/images/360 (1).jpg)
-![360LAB2](/images/360 (2).jpg)
+![360LAB](/images/360_1.jpg)
+![360LAB2](/images/360_2.jpg)
 ## References
 - [Resolume Arena](https://resolume.com/)
 - [Ableton Live](https://www.ableton.com/)
