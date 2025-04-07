@@ -71,4 +71,4 @@ This project is part of academic research at the University of Twente. For inqui
 
 ---
 
-For more details, refer to the full thesis: [BLOCK SYSTEM [draft].pdf](BLOCK SYSTEM [draft].pdf).
+For more details, refer to the full thesis: [BLOCK_SYSTEM](/BLOCK_SYSTEM.pdf).
